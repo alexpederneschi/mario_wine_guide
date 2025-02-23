@@ -27,6 +27,10 @@ Run the Ollama container and mount a volume for the model storage. Replace ~/oll
 ```sh
 docker run -d -v ~/ollama_models:/root/.ollama -p 11434:11434 --name ollama-cnt ollama/ollama
 ```
+Pull the llama3.2 model into the Ollama container:
+```sh
+docker exec -it ollama-cnt ollama pull llama3.2
+```
 Create the Mario AI agent using the Modelfile included in the project:
 ```sh
 docker exec -it ollama-cnt ollama create mario -f /path/to/Modelfile
