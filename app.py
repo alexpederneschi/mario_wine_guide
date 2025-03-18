@@ -15,7 +15,7 @@ class AIAgent:
             return json.load(file)
 
     def get_response(self, user_prompt="Introduce yourself."):
-        """Generate a chat response."""
+        """Generate a response."""
         messages = [
             {"role": "system", "content": self.model['model']['system_prompt']},
             {"role": "user", "content": user_prompt}
