@@ -7,7 +7,7 @@ html, body {
 
 /* Add a background image to the body */
 body {
-    background-image: url('../data/background_bottles.jpg'); /* Replace with your image path */
+    background-image: url('../data/background.jpg'); /* Replace with your image path */
     background-size: cover; /* Ensure the image covers the entire background */
     background-position: center; /* Center the background image */
     background-repeat: no-repeat; /* Prevent the image from repeating */

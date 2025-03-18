@@ -1,27 +1,26 @@
 document.addEventListener('DOMContentLoaded', function () { 
     // Initialize the map
     var map = L.map('map', {
-        dragging: false, // Disable map dragging
-        zoomControl: false, // Disable zoom controls
-        scrollWheelZoom: false, // Disable zooming with the mouse wheel
-        doubleClickZoom: false, // Disable zooming with double-click
-        touchZoom: false, // Disable zooming with touch gestures
-        boxZoom: false, // Disable zooming with a box selection
-        keyboard: false // Disable zooming with keyboard shortcuts
-    }).setView([41.9028, 12.4964], 6); // Centered on Italy
+        dragging: false,
+        zoomControl: false,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
+        touchZoom: false,
+        boxZoom: false,
+        keyboard: false
+    }).setView([41.9028, 12.4964], 6);
 
     // Variable to store the bounds of the GeoJSON features
     var geoJsonBounds;
 
     // Ensure the map resizes when the window is resized
     window.addEventListener('resize', function () {
-        // Use a small delay to ensure the container has resized
         setTimeout(function () {
             map.invalidateSize();
             if (geoJsonBounds) {
-                map.fitBounds(geoJsonBounds); // Reset the zoom to fit the bounds
+                map.fitBounds(geoJsonBounds); 
             }
-        }, 100); // Adjust the delay if needed
+        }, 100);
     });
        
     // Define a color scale using D3
@@ -71,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Store the original color
                     layer.originalColor = layer.options.fillColor;
 
-                    // Add a `selected` property to track if the region is clicked
+                    // Add a 'selected' property to track if the region is clicked
                     layer.selected = false;
 
                     // Change color on mouseover
@@ -85,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     // Revert color on mouseout if the region is not selected
                     layer.on('mouseout', function (e) {
-                        if (!layer.selected) { // Only revert if the region is not selected
+                        if (!layer.selected) {
                             layer.setStyle({
                                 fillColor: layer.originalColor
                             });
@@ -153,8 +152,8 @@ document.addEventListener('DOMContentLoaded', function () {
             
             // Convert bounds to an array of arrays
             geoJsonBounds = [
-                [bounds.getSouthWest().lat, bounds.getSouthWest().lng], // Southwest corner
-                [bounds.getNorthEast().lat, bounds.getNorthEast().lng]  // Northeast corner
+                [bounds.getSouthWest().lat, bounds.getSouthWest().lng],
+                [bounds.getNorthEast().lat, bounds.getNorthEast().lng]
             ];
 
             // Fit the map to the bounds of the feature group
@@ -169,8 +168,8 @@ document.addEventListener('DOMContentLoaded', function () {
             window.selectedLayer.setStyle({
                 fillColor: window.selectedLayer.originalColor
             });
-            window.selectedLayer.selected = false; // Mark the region as unselected
-            window.selectedLayer = null; // Clear the selected region
+            window.selectedLayer.selected = false;
+            window.selectedLayer = null;
         }
 
         // Revert to general information about Italy
@@ -180,9 +179,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Check if the click is outside the map container
     document.addEventListener('click', function (event) {
-        const mapContainer = document.getElementById('map-container'); // Replace with your map container's ID
-        const customPopup = document.getElementById('info-box'); // Replace with your custom popup's ID
-        const image = document.getElementById('map-logo'); // Replace with your image's ID
+        const mapContainer = document.getElementById('map-container');
+        const customPopup = document.getElementById('info-box');
+        const image = document.getElementById('map-logo');
 
         // Check if the click is outside the map container or on the image
         if (
@@ -195,7 +194,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Revert to general information when clicking outside the map
     map.on('click', function (e) {
-        // Check if the click is on a GeoJSON feature
         const isClickOnFeature = geojson_feat.getLayers().some(layer => {
             return layer.getBounds().contains(e.latlng);
         });
