@@ -3,7 +3,7 @@ import ollama
 import json
 
 
-class ChatModel:
+class AIAgent:
     """Handles model configuration and interactions with Ollama."""
 
     def __init__(self, json_file='static/data/model.json'):
@@ -34,19 +34,19 @@ class ChatModel:
 
 
 app = Flask(__name__)
-chat_model = ChatModel()  # Load model once
+ai_agent = AIAgent() 
 
 
 @app.route('/')
 def index():
-    general_info = chat_model.get_response()
+    general_info = ai_agent.get_response()
     return render_template('index.html', general_info=general_info)
 
 
 @app.route('/get_region_info', methods=['POST'])
 def get_region_info():
     region_name = request.json.get('region')
-    regional_info = chat_model.get_response(region_name)
+    regional_info = ai_agent.get_response(region_name)
     return jsonify({"info": regional_info})
 
 
